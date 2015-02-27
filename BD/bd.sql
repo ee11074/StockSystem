@@ -89,10 +89,19 @@ CREATE TABLE `Buy`(
   item INTEGER,
   supplier INTEGER,
   quantity FLOAT,
-  dest_container INTEGER ,
+  price FLOAT,
+  dest_container INTEGER,
   FOREIGN KEY fk_it(item) REFERENCES Item(code),
   FOREIGN KEY fk_sup(supplier) REFERENCES Supplier(id),
   FOREIGN KEY fk_dest(dest_container) REFERENCES Container(code)
+);
+
+CREATE TABLE `BuyInfo` (
+	id INTEGER NOT NULL,
+	quantity FLOAT,
+	container INTEGER NOT NULL ,
+  FOREIGN KEY fk_it(id) REFERENCES Buy(id),
+  FOREIGN KEY fk_b(container) REFERENCES Container(code)
 );
 
 CREATE TABLE `Sale`(
@@ -105,4 +114,12 @@ CREATE TABLE `Sale`(
   FOREIGN KEY fk_it(item) REFERENCES Item(code),
   FOREIGN KEY fk_cl(client) REFERENCES Client(id),
   FOREIGN KEY fk_cont(container) REFERENCES Container(code)
+);
+
+CREATE TABLE `SaleInfo` (
+	id INTEGER NOT NULL,
+	quantity FLOAT,
+	container INTEGER,
+  FOREIGN KEY fk_it(id) REFERENCES Sale(id),
+  FOREIGN KEY fk_b(container) REFERENCES Container(code)
 );
