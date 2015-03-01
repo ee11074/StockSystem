@@ -9,11 +9,17 @@ app.get('/stock', function(req, res, next) {
   res.send('vilares');
 });
 
-app.post('/stock', function(req, res, next) {
-  db.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-    if (err) throw err;
-    console.log('The solution is: ', rows[0].solution);
-  });
-  console.log(req.body.var);
-  res.send('vilares');
+app.post('/new_item', function(req, res, next) {
+  product_info = req.body.data;
+  if (req.body.type === "fabric") {
+    db.query('INSERT INTO fabrication SET ?', product_info, function(err, result) {
+      if (err) throw err;
+    });
+  } else if (req.body.type === "buy") {
+    db.query('INSERT INTO item SET ?', product_info, function(err, result) {
+      if (err) throw err;
+    });
+  } else {
+    res.send("{'error':'invalid'}");
+  }
 });

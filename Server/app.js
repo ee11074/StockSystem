@@ -10,16 +10,17 @@ app.use(bodyParser.urlencoded({
 })); // for parsing application/x-www-form-urlencoded
 
 var connection = module.exports.db = mysql.createConnection({
-  host: 'sql3.freemysqlhosting.net',
-  user: 'sql368676',
-  password: 'rQ2*hW3*'
+  host: '127.0.0.1',
+  user: 'root',
+  password: '',
+  database: 'stocksystem'
 });
 
 connection.connect();
 
 require('./routes/routes');
 
-app.set('port', process.env.PORT || '80');
+app.set('port', process.env.PORT || '8080');
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('\n----------------------\nNode.js server listening on port ' + app.get('port'));
