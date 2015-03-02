@@ -1,12 +1,31 @@
 app = require('../app');
 db = require('../app').db;
 
-app.get('/', function(req, res, next) {
-  res.send('vilares');
+app.get('/', function(req, res) {
+  partial = {
+    head: 'partials/header',
+    scripts: 'partials/scripts',
+    content: 'partials/sidebar',
+    body: 'pages/new_item'
+  };
+  res.render(
+    'index', {
+      partials: partial
+    }
+  );
 });
 
-app.get('/stock', function(req, res, next) {
-  res.send('vilares');
+app.get('/login', function(req, res) {
+  partial = {
+    head: 'partials/header',
+    scripts: 'partials/scripts',
+    content: 'pages/login'
+  };
+  res.render(
+    'index', {
+      partials: partial
+    }
+  );
 });
 
 app.post('/new_item', function(req, res, next) {
