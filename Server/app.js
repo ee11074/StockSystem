@@ -4,6 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var hoganexpress = require('hogan-express');
+var session = module.exports.session = require('express-session');
 
 var app = module.exports = express();
 app.engine('html', hoganexpress);
@@ -13,6 +14,12 @@ app.set('port', process.env.PORT || '80');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'supernova',
+  saveUninitialized: true,
+  resave: true
+}));
+
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
