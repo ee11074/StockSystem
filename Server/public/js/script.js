@@ -20,3 +20,10 @@ $(document).ready(function() {
       });
     });
 });
+
+$("#fab, #buy").change(function() {
+  if ($('#fab').is(':checked')) {
+    $("#fab_form").show();
+  } else
+    $("#fab_form").hide();
+});
